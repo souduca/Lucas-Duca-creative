@@ -49,8 +49,8 @@
   .avail b{color:var(--ink);font-weight:500}
 
   /* celular central (substitui a pessoa da referência) */
-  .center{position:absolute;left:calc(50% - min(22vw,310px));bottom:0;width:min(44vw,620px);z-index:2;line-height:0}
-  .center img{width:100%;height:auto;display:block;filter:grayscale(1) brightness(1.3) contrast(1.1);mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%);mask-image:linear-gradient(to bottom,transparent 0,#000 18%)}
+  .center{position:absolute;left:calc(50% - min(22vw,310px));bottom:0;width:min(44vw,620px);z-index:2;line-height:0;mix-blend-mode:multiply}
+  .center img{width:100%;height:auto;display:block;filter:grayscale(1) brightness(1.3) contrast(1.1);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%);mask-image:linear-gradient(to bottom,transparent 0,#000 18%)}
 
   /* cards inferiores */
   .stat{position:absolute;left:28px;bottom:28px;z-index:4;background:#c9c9c9;padding:8px;border-radius:6px;display:flex;gap:8px}
