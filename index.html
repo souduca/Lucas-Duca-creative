@@ -21,7 +21,7 @@
 
   /* ===== HERO (claro) ===== */
   .hero{background:var(--light);color:var(--ink);min-height:100vh;position:relative;overflow:hidden;padding:24px 28px 28px;display:flex;flex-direction:column}
-  .hero::before{content:"";position:absolute;top:0;bottom:0;right:0;aspect-ratio:1072/1467;z-index:0;background:url(duca.webp) center/100% 100% no-repeat;filter:grayscale(1) brightness(1.1);-webkit-mask-image:linear-gradient(to right,transparent 0,#000 38%);mask-image:linear-gradient(to right,transparent 0,#000 38%);pointer-events:none}
+  .hero::before{content:"";position:absolute;top:70px;bottom:0;right:7vw;aspect-ratio:690/940;max-width:46vw;z-index:0;background:url(duca-cutout.png) bottom/contain no-repeat;pointer-events:none}
   .top{display:grid;grid-template-columns:1fr auto 1fr;align-items:start;position:relative;z-index:5}
   .pill{display:inline-flex;gap:4px;background:#fff;padding:5px;border-radius:12px;font-size:12px}
   .pill a{padding:9px 16px;border-radius:8px;color:#777}
@@ -167,7 +167,7 @@
     .hero h1{position:relative;left:0;top:0;margin:70px 0 24px;font-size:22vw}
     .about,.badge,.avail{position:relative;left:0;right:auto;top:0;margin-bottom:24px;display:block;text-align:left}
     .badge{display:inline-flex}
-    .hero::before{top:auto;height:75%;right:-10%;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 25%);mask-image:linear-gradient(to bottom,transparent 0,#000 25%)}
+    .hero::before{top:auto;height:70%;right:50%;transform:translateX(50%);width:90%;max-width:none;background-position:bottom center}
     .hero{min-height:100vh}
     .stat,.latest,.brands{display:none}
     .top{grid-template-columns:1fr auto}.date{display:none}
