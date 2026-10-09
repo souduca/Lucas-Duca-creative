@@ -49,8 +49,8 @@
   .avail b{color:var(--ink);font-weight:500}
 
   /* celular central (substitui a pessoa da referência) */
-  .center{position:absolute;left:calc(50% - min(22vw,310px));bottom:0;width:min(44vw,620px);z-index:2;line-height:0;mix-blend-mode:multiply}
-  .center img{width:100%;height:auto;display:block;filter:grayscale(1) brightness(1.3) contrast(1.1);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%);mask-image:linear-gradient(to bottom,transparent 0,#000 18%)}
+  .center{position:absolute;left:calc(50% - min(22vw,310px));bottom:0;width:min(44vw,620px);z-index:2;line-height:0;}
+  .center canvas{width:100%;height:auto;display:block}
 
   /* cards inferiores */
   .stat{position:absolute;left:28px;bottom:28px;z-index:4;background:#c9c9c9;padding:8px;border-radius:6px;display:flex;gap:8px}
@@ -202,7 +202,7 @@
   <div class="badge"><i>✓</i> Foco em resultado</div>
   <div class="avail">Disponíveis<br><b>● para você</b></div>
 
-  <div class="center"><img src="duca.webp" alt="Duca, criador de vídeo vertical, de perfil segurando uma câmera"></div>
+  <div class="center"><canvas id="cut" role="img" aria-label="Duca, criador de vídeo vertical, de perfil segurando uma câmera"></canvas></div>
 
   <div class="stat">
     <div class="a"><div><b>500+</b><small>Vídeos entregues</small></div><a href="#contato" class="btn">Agende uma call</a></div>
@@ -361,6 +361,25 @@ document.querySelectorAll(".card").forEach(c=>c.onclick=()=>{
 });
 modal.onclick=e=>{if(e.target===modal)close()};
 addEventListener("keydown",e=>{if(e.key==="Escape")close()});
+
+// recorte da foto: céu vira transparente, fica só a silhueta
+(()=>{
+  const cv=$("#cut"), im=new Image();
+  im.onload=()=>{
+    const w=cv.width=im.naturalWidth, h=cv.height=im.naturalHeight, x=cv.getContext("2d");
+    x.drawImage(im,0,0);
+    const d=x.getImageData(0,0,w,h), p=d.data, L=i=>(.299*p[i]+.587*p[i+1]+.114*p[i+2])/255;
+    for(let r=0;r<h;r++){
+      let bg=0; for(let c=0;c<12;c++) bg+=L((r*w+c)*4); bg/=12;
+      for(let c=0;c<w;c++){
+        const i=(r*w+c)*4, a=Math.min(1,Math.max(0,(bg-L(i))/(bg-.28)));
+        p[i]=p[i+1]=p[i+2]=12; p[i+3]=Math.round(Math.pow(a,.8)*255);
+      }
+    }
+    x.putImageData(d,0,0);
+  };
+  im.src="duca.webp";
+})();
 </script>
 </body>
 </html>
