@@ -85,6 +85,15 @@
   .manifesto p{font-size:14px;color:#fff}
   .manifesto p span{color:#555}
 
+  /* ===== PARCEIROS (faixa horizontal) ===== */
+  .marquee{overflow:hidden;border-block:1px solid var(--line);padding:34px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .marquee .track{display:flex;width:max-content;animation:slide 28s linear infinite}
+  .marquee:hover .track{animation-play-state:paused}
+  .marquee .item{flex:none;display:grid;place-items:center;height:48px;padding:0 44px;color:#8a8a90;font-size:clamp(20px,2.4vw,30px);font-weight:500;letter-spacing:-.03em;white-space:nowrap}
+  .marquee .item img{height:100%;width:auto;filter:grayscale(1) brightness(1.6);opacity:.7}
+  @keyframes slide{to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.marquee .track{animation:none}}
+
   /* ===== TRUSTED ===== */
   .wrap{max-width:1280px;margin:0 auto;padding:0 28px}
   .trusted{border:1px solid #444;border-radius:20px;padding:34px;display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;gap:14px;margin:0 28px}
@@ -245,6 +254,8 @@
   <p>Marketing orientado a performance, do roteiro à entrega. <span>Feito para marcas que querem crescer.</span></p>
 </div>
 
+<div class="marquee" aria-label="Parceiros"><div class="track" id="partners"></div></div>
+
 <section id="trabalhos">
   <div class="wrap">
     <div class="head"><h2>Trabalhos<br>selecionados</h2><p>Toque em um vídeo para assistir em tela cheia.</p></div>
@@ -317,6 +328,11 @@ const media = (p, extra="") => p.video
 $("#y").textContent = new Date().getFullYear();
 $("#wa").href = `https://wa.me/${whatsapp}?text=${encodeURIComponent("Olá! Vim pelo site e quero um orçamento de vídeo vertical.")}`;
 $("#logos").innerHTML = clients.map(c=>`<div>${c}</div>`).join("");
+
+// parceiros: para usar logo, troque o nome pelo caminho da imagem (ex: "logos/marca-a.png")
+const partner = c => /\.(png|jpe?g|svg|webp)$/i.test(c) ? `<span class="item"><img src="${c}" alt=""></span>` : `<span class="item">${c}</span>`;
+const row = clients.map(partner).join("");
+$("#partners").innerHTML = row + row;
 $("#brandsRow").innerHTML = clients.slice(0,3).map(c=>`<span>${c}</span>`).join("");
 $("#latestTitle").textContent = projects[1].title;
 $("#latestThumb").innerHTML = media(projects[1],"autoplay") + "<i>▶</i>";
