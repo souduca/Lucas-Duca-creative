@@ -21,10 +21,7 @@
 
   /* ===== HERO (claro) ===== */
   .hero{background:var(--light);color:var(--ink);height:max(50vh,440px);position:relative;overflow:hidden;padding:24px 28px 28px;display:flex;flex-direction:column}
-  .hero::before{content:"";position:absolute;bottom:0;right:7vw;height:84%;aspect-ratio:690/940;z-index:0;background:url(duca-cutout.png) bottom/contain no-repeat;pointer-events:none;transform-origin:bottom center;animation:duca-in 1.4s cubic-bezier(.2,.7,.2,1) both,duca-float 7s ease-in-out 1.4s infinite}
-  @keyframes duca-in{from{opacity:0;translate:0 60px;filter:blur(8px)}to{opacity:1;translate:0 0;filter:blur(0)}}
-  @keyframes duca-float{0%,100%{translate:0 0;scale:1}50%{translate:0 -10px;scale:1.015}}
-  @media(prefers-reduced-motion:reduce){.hero::before{animation:none}}
+  .hero::before{content:"";position:absolute;bottom:0;right:7vw;height:84%;aspect-ratio:690/940;z-index:0;background:url(duca-cutout.png) bottom/contain no-repeat;pointer-events:none}
   .top{display:flex;justify-content:space-between;align-items:start;position:relative;z-index:5}
   .pill{display:inline-flex;gap:4px;background:#fff;padding:5px;border-radius:12px;font-size:12px}
   .pill a{padding:9px 16px;border-radius:8px;color:#777}
