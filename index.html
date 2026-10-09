@@ -49,8 +49,8 @@
   .avail b{color:var(--ink);font-weight:500}
 
   /* celular central (substitui a pessoa da referência) */
-  .center{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(44vw,620px);z-index:2;line-height:0}
-  .center img{width:100%;height:auto;display:block;filter:grayscale(1) contrast(1.05);mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%);mask-image:linear-gradient(to bottom,transparent 0,#000 18%)}
+  .center{position:absolute;left:calc(50% - min(22vw,310px));bottom:0;width:min(44vw,620px);z-index:2;line-height:0}
+  .center img{width:100%;height:auto;display:block;filter:grayscale(1) brightness(1.3) contrast(1.1);mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%);mask-image:linear-gradient(to bottom,transparent 0,#000 18%)}
 
   /* cards inferiores */
   .stat{position:absolute;left:28px;bottom:28px;z-index:4;background:#c9c9c9;padding:8px;border-radius:6px;display:flex;gap:8px}
@@ -168,7 +168,7 @@
     .hero h1{position:relative;left:0;top:0;margin:70px 0 24px;font-size:22vw}
     .about,.badge,.avail{position:relative;left:0;right:auto;top:0;margin-bottom:24px;display:block;text-align:left}
     .badge{display:inline-flex}
-    .center{position:relative;left:0;top:0;transform:none;width:90%;max-width:420px;margin:10px auto 0;height:auto}
+    .center{position:relative;left:0;top:0;transform:none;width:90%;max-width:420px;margin:10px auto 0;height:auto;left:0}
     .stat,.latest,.brands{display:none}
     .top{grid-template-columns:1fr auto}.date{display:none}
     .trusted{grid-template-columns:1fr 1fr}
