@@ -167,12 +167,33 @@
   footer a:hover{color:#000}
 
   /* ===== MODAL ===== */
-  .modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:100;display:none;place-items:center;padding:20px}
-  .modal.open{display:grid}
-  .modal .box{height:min(86vh,820px);aspect-ratio:9/16;border-radius:22px;overflow:hidden;position:relative;background:#000}
-  .modal video,.modal .ph{width:100%;height:100%;object-fit:cover}
-  .modal .ph{align-items:center;justify-content:center;text-align:center;font-size:16px}
-  .modal button{position:absolute;top:16px;right:18px;z-index:2;background:rgba(255,255,255,.18);border:0;color:#fff;width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px}
+  .modal.open{display:flex}
+  .modal .box{height:min(86vh,820px);aspect-ratio:9/16;border-radius:22px;overflow:hidden;position:relative;background:#000;touch-action:pan-y}
+  .modal .box video,.modal .box .ph{width:100%;height:100%;object-fit:cover}
+  .modal .box .ph{align-items:center;justify-content:center;text-align:center;font-size:16px}
+  .modal .x{position:absolute;top:16px;right:18px;z-index:3;background:rgba(255,255,255,.18);border:0;color:#fff;width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer}
+  /* galeria (série de vídeos) */
+  .stage{display:flex;align-items:center;gap:18px}
+  .nav,.meta,.thumbs{display:none}
+  .nav{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);border:0;color:#fff;font:inherit;font-size:20px;cursor:pointer;transition:.2s}
+  .nav:hover:not(:disabled){background:#fff;color:#000}
+  .nav:disabled{opacity:.2;cursor:default}
+  .modal.series .nav{display:grid;place-items:center}
+  .modal.series .box{height:min(66vh,680px)}
+  .meta{flex-direction:column;align-items:center;gap:4px;text-align:center}
+  .meta b{font-size:17px;font-weight:500;letter-spacing:-.02em}
+  .meta span{font-size:12px;color:#8a8a90}
+  .modal.series .meta{display:flex}
+  .thumbs{position:relative;gap:8px;overflow-x:auto;max-width:min(92vw,640px);padding:4px;scrollbar-width:none}
+  .thumbs::-webkit-scrollbar{display:none}
+  .modal.series .thumbs{display:flex}
+  .thumbs button{flex:none;width:50px;aspect-ratio:9/16;border-radius:8px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;background:#111;opacity:.45;transition:.2s}
+  .thumbs button:hover{opacity:.8}
+  .thumbs button.on{border-color:#fff;opacity:1}
+  .thumbs img,.thumbs .ph{width:100%;height:100%;object-fit:cover}
+  .thumbs .ph{padding:0;display:grid;place-items:center;font-size:12px}
+  @media(max-width:700px){.modal.series .nav{display:none}.modal.series .box{height:min(64vh,600px)}}
 
   /* ===== RESPONSIVO ===== */
   @media(max-width:1000px){
@@ -301,16 +322,28 @@
   </footer>
 </div>
 
-<div class="modal" id="modal"><div class="box" id="box"></div></div>
+<div class="modal" id="modal">
+  <button class="x" aria-label="Fechar">✕</button>
+  <div class="stage">
+    <button class="nav prev" aria-label="Vídeo anterior">←</button>
+    <div class="box" id="box"></div>
+    <button class="nav next" aria-label="Próximo vídeo">→</button>
+  </div>
+  <div class="meta" id="meta"></div>
+  <div class="thumbs" id="thumbs"></div>
+</div>
 
 <script>
 /* ========= EDITE AQUI =========
    Para usar vídeos reais, preencha "video" com o caminho do arquivo
-   (ex: "videos/campanha1.mp4"). Sem "video", aparece um placeholder. */
+   (ex: "videos/campanha1.mp4"). Sem "video", aparece um placeholder.
+   Para uma SÉRIE (galeria de vídeos do mesmo assunto), use "series":
+   series:[{title:"Episódio 1", video:"videos/ep1.mp4", poster:"videos/ep1.jpg"}, ...] */
 const projects = [
   {title:"Lançamento de produto", client:"Eclee Fitness", cat:"Anúncios", views:"2,4M views", g:"g1", video:"videos/eclee-fitness.mp4", poster:"videos/eclee-fitness.jpg"},
   {title:"Rotina de skincare",    client:"Fashion Hair", cat:"Redes sociais", views:"890k views", g:"g2", video:"videos/fashion-hair.mp4", poster:"videos/fashion-hair.jpg"},
-  {title:"Tour pelo restaurante", client:"Marca C", cat:"Redes sociais", views:"1,1M views", g:"g3", video:""},
+  {title:"Tour pelo restaurante", client:"Marca C", cat:"Redes sociais", views:"1,1M views", g:"g3", video:"",
+   series:[{title:"Episódio 1"},{title:"Episódio 2"},{title:"Episódio 3"},{title:"Episódio 4"}]},
   {title:"Depoimento de cliente", client:"Marca D", cat:"UGC", views:"340k views", g:"g4", video:""},
   {title:"Bastidores do evento",  client:"Marca E", cat:"Eventos", views:"610k views", g:"g5", video:""},
   {title:"Oferta relâmpago",      client:"Marca F", cat:"Anúncios", views:"CTR 4,8%", g:"g6", video:""},
@@ -356,9 +389,9 @@ const cats = ["Todos", ...new Set(projects.map(p=>p.cat))];
 $("#filters").innerHTML = cats.map((c,i)=>`<button class="${i?'':'on'}" data-c="${c}">${c}</button>`).join("");
 $("#grid").innerHTML = projects.map((p,i)=>`
   <article class="card" data-i="${i}" data-c="${p.cat}">
-    ${media(p)}
+    ${media(p.series && p.series[0].video ? {...p, ...p.series[0]} : p)}
     <span class="play">▶</span>
-    <div class="info"><small>${p.cat}</small><h3>${p.title}</h3><p>${p.client} · ${p.views}</p></div>
+    <div class="info"><small>${p.cat}${p.series?` · Série de ${p.series.length}`:""}</small><h3>${p.title}</h3><p>${p.client} · ${p.views}</p></div>
   </article>`).join("");
 
 $("#filters").onclick = e => {
@@ -372,18 +405,55 @@ document.querySelectorAll(".card").forEach(c=>{
   c.onmouseenter=()=>v.play(); c.onmouseleave=()=>{v.pause();v.currentTime=0};
 });
 
-const modal=$("#modal"), box=$("#box");
-const close=()=>{modal.classList.remove("open");box.innerHTML=""};
-document.querySelectorAll(".card").forEach(c=>c.onclick=()=>{
-  const p=projects[c.dataset.i];
-  box.innerHTML = `<button aria-label="Fechar">✕</button>` + (p.video
-    ? `<video src="${p.video}" autoplay controls playsinline loop></video>`
-    : `<div class="ph ${p.g}">${p.title}<br>(adicione o vídeo)</div>`);
-  modal.classList.add("open");
-  box.querySelector("button").onclick=close;
+const modal=$("#modal"), box=$("#box"), meta=$("#meta"), thumbs=$("#thumbs");
+const prev=modal.querySelector(".prev"), next=modal.querySelector(".next");
+let cur=null, idx=0;
+
+const big = v => v.video
+  ? `<video src="${v.video}" ${v.poster?`poster="${v.poster}"`:""} autoplay controls playsinline ${cur.series?"":"loop"}></video>`
+  : `<div class="ph ${cur.g}">${v.title||cur.title}<br>(adicione o vídeo)</div>`;
+
+function show(i){
+  const s=cur.series; idx=i;
+  const v=s ? s[i] : cur;
+  box.innerHTML=big(v);
+  if(!s) return;
+  meta.innerHTML=`<b>${cur.title}</b><span>${v.title||`Vídeo ${i+1}`} · ${i+1} de ${s.length}</span>`;
+  prev.disabled=i===0; next.disabled=i===s.length-1;
+  [...thumbs.children].forEach((t,j)=>t.classList.toggle("on",j===i));
+  const t=thumbs.children[i];
+  thumbs.scrollTo({left:t.offsetLeft-thumbs.clientWidth/2+t.offsetWidth/2,behavior:"smooth"});
+  const vid=box.querySelector("video");
+  if(vid) vid.onended=()=>{ if(idx<s.length-1) show(idx+1) }; // passa sozinho para o próximo
+}
+
+function openProject(p){
+  cur=p; modal.classList.toggle("series",!!p.series);
+  thumbs.innerHTML = p.series ? p.series.map((v,j)=>`<button aria-label="Vídeo ${j+1}">${
+    v.poster ? `<img src="${v.poster}" alt="">` : `<div class="ph ${p.g}">${j+1}</div>`}</button>`).join("") : "";
+  modal.classList.add("open"); show(0);
+}
+const close=()=>{modal.classList.remove("open");box.innerHTML="";cur=null};
+const go=d=>{ if(cur&&cur.series){const n=idx+d; if(n>=0&&n<cur.series.length) show(n)} };
+
+document.querySelectorAll(".card").forEach(c=>c.onclick=()=>openProject(projects[c.dataset.i]));
+thumbs.onclick=e=>{const b=e.target.closest("button"); if(b) show([...thumbs.children].indexOf(b))};
+prev.onclick=()=>go(-1); next.onclick=()=>go(1);
+modal.querySelector(".x").onclick=close;
+modal.onclick=e=>{if(e.target===modal||e.target.classList.contains("stage"))close()};
+addEventListener("keydown",e=>{
+  if(!cur) return;
+  if(e.key==="Escape")close();
+  if(e.key==="ArrowLeft")go(-1);
+  if(e.key==="ArrowRight")go(1);
 });
-modal.onclick=e=>{if(e.target===modal)close()};
-addEventListener("keydown",e=>{if(e.key==="Escape")close()});
+// deslizar para o lado no celular
+let x0=null;
+box.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
+box.addEventListener("touchend",e=>{
+  if(x0===null) return; const dx=e.changedTouches[0].clientX-x0; x0=null;
+  if(Math.abs(dx)>50) go(dx<0?1:-1);
+});
 
 </script>
 </body>
