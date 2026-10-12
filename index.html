@@ -342,8 +342,13 @@
 const projects = [
   {title:"Lançamento de produto", client:"Eclee Fitness", cat:"Anúncios", views:"2,4M views", g:"g1", video:"videos/eclee-fitness.mp4", poster:"videos/eclee-fitness.jpg"},
   {title:"Rotina de skincare",    client:"Fashion Hair", cat:"Redes sociais", views:"890k views", g:"g2", video:"videos/fashion-hair.mp4", poster:"videos/fashion-hair.jpg"},
-  {title:"Tour pelo restaurante", client:"Marca C", cat:"Redes sociais", views:"1,1M views", g:"g3", video:"",
-   series:[{title:"Saúde do casal", video:"videos/saude-do-casal.mp4", poster:"videos/saude-do-casal.jpg"},{title:"Episódio 2"},{title:"Episódio 3"},{title:"Episódio 4"}]},
+  {title:"Série de conteúdo", client:"Dra. Ariane Gimenez", cat:"Redes sociais", views:"5 episódios", g:"g3", video:"",
+   series:[
+     {title:"Saúde do casal", video:"videos/ariane-1.mp4", poster:"videos/ariane-1.jpg"},
+     {title:"Episódio 2",     video:"videos/ariane-2.mp4", poster:"videos/ariane-2.jpg"},
+     {title:"Episódio 3",     video:"videos/ariane-3.mp4", poster:"videos/ariane-3.jpg"},
+     {title:"Episódio 4",     video:"videos/ariane-4.mp4", poster:"videos/ariane-4.jpg"},
+     {title:"Episódio 5",     video:"videos/ariane-5.mp4", poster:"videos/ariane-5.jpg"}]},
   {title:"Depoimento de cliente", client:"Marca D", cat:"UGC", views:"340k views", g:"g4", video:""},
   {title:"Bastidores do evento",  client:"Marca E", cat:"Eventos", views:"610k views", g:"g5", video:""},
   {title:"Oferta relâmpago",      client:"Marca F", cat:"Anúncios", views:"CTR 4,8%", g:"g6", video:""},
@@ -418,7 +423,7 @@ function show(i){
   const v=s ? s[i] : cur;
   box.innerHTML=big(v);
   if(!s) return;
-  meta.innerHTML=`<b>${cur.title}</b><span>${v.title||`Vídeo ${i+1}`} · ${i+1} de ${s.length}</span>`;
+  meta.innerHTML=`<b>${cur.client}</b><span>${v.title||`Vídeo ${i+1}`} · ${i+1} de ${s.length}</span>`;
   prev.disabled=i===0; next.disabled=i===s.length-1;
   [...thumbs.children].forEach((t,j)=>t.classList.toggle("on",j===i));
   const t=thumbs.children[i];
