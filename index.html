@@ -150,7 +150,8 @@
   .svc p{color:#8a8a90;font-size:14px;max-width:380px}
 
   /* ===== CLIENTES ===== */
-  .logos{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .logos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .logos div{text-align:center;padding:0 10px}
   .logos div{background:#0e0e10;border:1px solid var(--line);border-radius:12px;height:84px;display:grid;place-items:center;color:#888;font-weight:500;font-size:14px}
 
   /* ===== DEPOIMENTO ===== */
@@ -206,7 +207,7 @@
     .top{grid-template-columns:1fr auto}.date{display:none}
     .trusted{grid-template-columns:1fr 1fr}
     .grid{grid-template-columns:repeat(2,1fr)}
-    .logos{grid-template-columns:repeat(3,1fr)}
+    .logos{grid-template-columns:repeat(2,1fr)}
     .svc div{grid-template-columns:40px 1fr}.svc p{grid-column:2}
     .strip{padding:18px 20px}
   }
@@ -340,25 +341,26 @@
    Para uma SÉRIE (galeria de vídeos do mesmo assunto), use "series":
    series:[{title:"Episódio 1", video:"videos/ep1.mp4", poster:"videos/ep1.jpg"}, ...] */
 const projects = [
-  {title:"Lançamento de produto", client:"Eclee Fitness", cat:"Anúncios", views:"2,4M views", g:"g1", video:"videos/eclee-fitness.mp4", poster:"videos/eclee-fitness.jpg"},
-  {title:"Rotina de skincare",    client:"Fashion Hair", cat:"Redes sociais", views:"890k views", g:"g2", video:"videos/fashion-hair.mp4", poster:"videos/fashion-hair.jpg"},
-  {title:"Série de conteúdo", client:"Dra. Ariane Gimenez", cat:"Redes sociais", views:"5 episódios", g:"g3", video:"",
+  {title:"Campanha moda fitness",  client:"Eclee Fitness", cat:"Moda & Beleza", views:"Campanha", g:"g1", video:"videos/eclee-fitness.mp4", poster:"videos/eclee-fitness.jpg"},
+  {title:"Experiência no salão",   client:"Fashion Hair", cat:"Moda & Beleza", views:"Reels", g:"g2", video:"videos/fashion-hair.mp4", poster:"videos/fashion-hair.jpg"},
+  {title:"Saúde sem mitos",        client:"Dra. Ariane Gimenez", cat:"Saúde", views:"Série educativa", g:"g3", video:"",
    series:[
-     {title:"Saúde do casal", video:"videos/ariane-1.mp4", poster:"videos/ariane-1.jpg"},
-     {title:"Episódio 2",     video:"videos/ariane-2.mp4", poster:"videos/ariane-2.jpg"},
-     {title:"Episódio 3",     video:"videos/ariane-3.mp4", poster:"videos/ariane-3.jpg"},
-     {title:"Episódio 4",     video:"videos/ariane-4.mp4", poster:"videos/ariane-4.jpg"},
-     {title:"Episódio 5",     video:"videos/ariane-5.mp4", poster:"videos/ariane-5.jpg"}]},
-  {title:"Criativos", client:"Erva Doce", cat:"Anúncios", views:"2 vídeos", g:"g4", video:"",
+     {title:"Saúde do casal",              video:"videos/ariane-1.mp4", poster:"videos/ariane-1.jpg"},
+     {title:"Mitos da alimentação",        video:"videos/ariane-2.mp4", poster:"videos/ariane-2.jpg"},
+     {title:"O que a balança esconde",     video:"videos/ariane-3.mp4", poster:"videos/ariane-3.jpg"},
+     {title:"Não é uma questão estética",  video:"videos/ariane-4.mp4", poster:"videos/ariane-4.jpg"},
+     {title:"Músculo não é estética",      video:"videos/ariane-5.mp4", poster:"videos/ariane-5.jpg"}]},
+  {title:"Criativos para anúncios", client:"Erva Doce", cat:"Saúde", views:"Anúncios", g:"g4", video:"",
    series:[
-     {title:"Criativo 1", video:"videos/erva-doce-1.mp4", poster:"videos/erva-doce-1.jpg"},
-     {title:"Criativo 2", video:"videos/erva-doce-2.mp4", poster:"videos/erva-doce-2.jpg"}]},
-  {title:"Bastidores do evento",  client:"Blue3 Investimentos", cat:"Eventos", views:"610k views", g:"g5", video:"videos/evento-blue3.mp4", poster:"videos/evento-blue3.jpg"},
-  {title:"Bebida do mês",         client:"Marca F", cat:"Anúncios", views:"CTR 4,8%", g:"g6", video:"videos/bebida-do-mes.mp4", poster:"videos/bebida-do-mes.jpg"},
-  {title:"Review honesto",        client:"Marca G", cat:"UGC", views:"1,7M views", g:"g2", video:""},
-  {title:"Aftermovie",            client:"Dra. Erica", cat:"Eventos", views:"520k views", g:"g1", video:"videos/aftermovie-dra-erica.mp4", poster:"videos/aftermovie-dra-erica.jpg"},
+     {title:"Medicamento em bombom", video:"videos/erva-doce-1.mp4", poster:"videos/erva-doce-1.jpg"},
+     {title:"Clube Erva Doce",       video:"videos/erva-doce-2.mp4", poster:"videos/erva-doce-2.jpg"}]},
+  {title:"Fire in the House",      client:"Blue3 Investimentos", cat:"Eventos", views:"Cobertura de evento", g:"g5", video:"videos/evento-blue3.mp4", poster:"videos/evento-blue3.jpg"},
+  {title:"Bebida do mês",          client:"Marca F", cat:"Saúde", views:"Reels", g:"g6", video:"videos/bebida-do-mes.mp4", poster:"videos/bebida-do-mes.jpg"},
+  {title:"Passagens mais baratas", client:"Hely Braga", cat:"Negócios", views:"Reels educativo", g:"g2", video:"videos/hely-braga.mp4", poster:"videos/hely-braga.jpg"},
+  {title:"Aftermovie",             client:"Dra. Erica", cat:"Eventos", views:"Aftermovie", g:"g1", video:"videos/aftermovie-dra-erica.mp4", poster:"videos/aftermovie-dra-erica.jpg"},
+  {title:"Hambúrguer na brasa",    client:"Campina Burguer", cat:"Gastronomia", views:"Reels", g:"g3", video:"videos/campina-burguer.mp4", poster:"videos/campina-burguer.jpg"},
 ];
-const clients = ["Marca A","Marca B","Marca C","Marca D","Marca E","Marca F"];
+const clients = ["Eclee Fitness","Fashion Hair","Dra. Ariane Gimenez","Erva Doce","Blue3 Investimentos","Hely Braga","Dra. Erica","Campina Burguer"];
 // logos da faixa de parceiros (PNG branco com fundo transparente, pasta logos/)
 const partners = ["logos/chevrolet.png","logos/blue3-xp.png","logos/lumine.png","logos/eclee.png","logos/clics-midia.png","logos/parceiro-b.png","logos/frango-rico.png","logos/ibsolutions.png","logos/erva-doce.png"];
 const whatsapp = "5500000000000"; // DDI+DDD+número, só dígitos
