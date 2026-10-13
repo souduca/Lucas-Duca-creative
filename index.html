@@ -244,7 +244,7 @@
 <header class="hero">
   <div class="top">
     <nav class="pill">
-      <a href="#" class="on">Home</a><a href="#trabalhos">Trabalhos</a><a href="#servicos">Serviços</a><a href="#clientes">Clientes</a>
+      <a href="#" class="on">Home</a><a href="#trabalhos">Trabalhos</a><a href="#servicos">Serviços</a><a href="#contato">Contato</a>
     </nav>
     <div class="right"><a href="#contato" class="btn">Fale conosco <span>↗</span></a></div>
   </div>
@@ -294,22 +294,16 @@
       <div><span>01</span><h3>Roteiro & estratégia</h3><p>Ganchos, narrativa e calendário de conteúdo alinhados ao objetivo da marca.</p></div>
       <div><span>02</span><h3>Gravação</h3><p>Captação profissional em estúdio ou externa, com direção e equipe enxuta.</p></div>
       <div><span>03</span><h3>Edição & motion</h3><p>Cortes dinâmicos, legendas, trilha e efeitos no ritmo de cada plataforma.</p></div>
-      <div><span>04</span><h3>UGC & Ads</h3><p>Criativos para Meta e TikTok Ads, com variações para testes A/B.</p></div>
+      <div><span>04</span><h3>Cobertura de eventos</h3><p>Aftermovies, bastidores e reels do seu evento, captados e editados com agilidade.</p></div>
     </div>
   </div>
 </section>
 
-<section id="clientes">
-  <div class="wrap">
-    <div class="head"><h2>Quem<br>confia</h2></div>
-    <div class="logos" id="logos"></div>
-  </div>
-</section>
 
 <section>
   <div class="wrap">
     <blockquote>“Nossos Reels passaram de 2 mil para 400 mil views médias em três meses. O time entende de plataforma como ninguém.”</blockquote>
-    <cite>— Nome Sobrenome, Marca Exemplo</cite>
+    <cite>— Depoimento de cliente</cite>
   </div>
 </section>
 
@@ -373,7 +367,6 @@ const media = (p, extra="") => p.video
 
 $("#y").textContent = new Date().getFullYear();
 $("#wa").href = `https://wa.me/${whatsapp}?text=${encodeURIComponent("Olá! Vim pelo site e quero um orçamento de vídeo vertical.")}`;
-$("#logos").innerHTML = clients.map(c=>`<div>${c}</div>`).join("");
 
 // parceiros: para usar logo, troque o nome pelo caminho da imagem (ex: "logos/marca-a.png")
 const partner = c => /\.(png|jpe?g|svg|webp)$/i.test(c) ? `<span class="item"><img src="${c}" alt=""></span>` : `<span class="item">${c}</span>`;
